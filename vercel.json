@@ -1,15 +1,25 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": ".output",
+  "outputDirectory": ".output/public",
   "env": {
     "NODE_ENV": "production"
   },
   "framework": "vite",
   "regions": ["iad1"],
+  "serverFunctions": [
+    ".output/server"
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api/server"
+    }
+  ],
   "functions": {
-    "src/**/*.ts": {
+    "api/server.js": {
       "runtime": "nodejs20.x",
-      "memory": 1024
+      "memory": 1024,
+      "maxDuration": 60
     }
   }
 }
